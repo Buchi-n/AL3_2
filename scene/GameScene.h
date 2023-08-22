@@ -36,15 +36,11 @@ public: // メンバ関数
 	/// </summary>
 	void Initialize();
 
-
-	
-
 	/// <summary>
 	/// 毎フレーム処理
 	/// </summary>
 	void Update();
 
-	
 	/// <summary>
 	/// 敵弾を追加
 	/// </summary>
@@ -80,9 +76,8 @@ public: // メンバ関数
 	//敵発生コマンド
 	std::stringstream enemyPopCommands;
 
-
 private:
-	
+
 	// メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -122,5 +117,10 @@ private:
 
 	int waitTimer = 120;
 
-
+	enum class Scene {
+		Title,
+		GamePlay,
+		Result,
+	};
+	Scene scene = Scene::Title;
 };
