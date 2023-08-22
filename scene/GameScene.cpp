@@ -23,6 +23,7 @@ GameScene::~GameScene() {
 	delete skydome_;
 	delete modelSkydome_;
 	delete railCamera_;
+	delete ui_;
 }
 
 void GameScene::Initialize() {
@@ -32,6 +33,8 @@ void GameScene::Initialize() {
 
 	// レティクルのテクスチャ
 	TextureManager::Load("target.png");
+	//タイトルのテクスチャ
+	TextureManager::Load("title.png");
 	// 自キャラの生成
 	player_ = new Player();
 	Vector3 playerPosition{0, 0, 50};
@@ -54,6 +57,7 @@ void GameScene::Initialize() {
 	model_ = Model::Create();
 	player_->Initialize(model_, textureHandleP_, playerPosition);
 	player_->SetParent(&railCamera_->GetWorldTransform());
+	ui_->Initialize();
 
 	newEnemy->Initialize(model_, textureHandleE_);
 	newEnemy->SetPlayer(player_);
@@ -222,6 +226,7 @@ void GameScene::Draw() {
 	/// </summary>
 	switch (scene) {
 	case GameScene::Scene::Title:
+		ui_->Draw();
 		break;
 	case GameScene::Scene::GamePlay:
 		player_->DrawUI();

@@ -14,6 +14,7 @@
 #include "Skydome.h"
 #include "RailCamera.h"
 #include <sstream>
+#include <Ui.h>
 
 /// <summary>
 /// ゲームシーン
@@ -112,7 +113,9 @@ private:
 	Model* modelSkydome_ = nullptr;
 
 	RailCamera* railCamera_ = nullptr;
-
+	
+	Ui* ui_ = nullptr;
+	
 	bool waitFlag = false;
 
 	int waitTimer = 120;
