@@ -50,6 +50,8 @@ void GameScene::Initialize() {
 	// レールカメラの生成
 	railCamera_ = new RailCamera();
 
+	ui_ = new Ui();
+
 	LoadEnemyPopData();
 
 	// 読み込み
