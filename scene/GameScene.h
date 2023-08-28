@@ -14,6 +14,7 @@
 #include "ViewProjection.h"
 #include "WorldTransform.h"
 #include <Ui.h>
+#include <Score.h>
 #include <sstream>
 
 /// <summary>
@@ -114,6 +115,8 @@ private:
 	RailCamera* railCamera_ = nullptr;
 
 	Ui* ui_ = nullptr;
+
+	Score* score_ = nullptr;
 
 	bool waitFlag = false;
 

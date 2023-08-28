@@ -35,6 +35,8 @@ void GameScene::Initialize() {
 	TextureManager::Load("target.png");
 	// タイトルのテクスチャ
 	TextureManager::Load("title.png");
+	//ナンバーテクスチャ
+	TextureManager::Load("num/1.png");
 	// 自キャラの生成
 	player_ = new Player();
 	Vector3 playerPosition{0, 0, 50};
@@ -50,6 +52,7 @@ void GameScene::Initialize() {
 	// レールカメラの生成
 	railCamera_ = new RailCamera();
 	ui_ = new Ui();
+	score_ = new Score();
 	LoadEnemyPopData();
 
 	// 読み込み
@@ -58,7 +61,7 @@ void GameScene::Initialize() {
 	player_->Initialize(model_, textureHandleP_, playerPosition);
 	player_->SetParent(&railCamera_->GetWorldTransform());
 	ui_->Initialize();
-
+	score_->Initialize();
 	newEnemy->Initialize(model_, textureHandleE_);
 	newEnemy->SetPlayer(player_);
 	// newEnemy->Initialize(model_, textureHandleE_);
@@ -235,6 +238,7 @@ void GameScene::Draw() {
 	switch (scene) {
 	case GameScene::Scene::Title:
 		ui_->Draw();
+		score_->DrawUI();
 		break;
 	case GameScene::Scene::GamePlay:
 		player_->DrawUI();
