@@ -3,18 +3,18 @@
 #include "Audio.h"
 #include "DebugCamera.h"
 #include "DirectXCommon.h"
+#include "Enemy.h"
 #include "Input.h"
 #include "Model.h"
 #include "Player.h"
-#include "Enemy.h"
+#include "RailCamera.h"
 #include "SafeDelete.h"
+#include "Skydome.h"
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
-#include "Skydome.h"
-#include "RailCamera.h"
-#include <sstream>
 #include <Ui.h>
+#include <sstream>
 
 /// <summary>
 /// ゲームシーン
@@ -53,7 +53,7 @@ public: // メンバ関数
 	/// </summary>
 	/// <param name="enemybullet"></param>
 	void AddEnemy(Enemy* enemy);
-	
+
 	void AddEnemy(Vector3 pos);
 
 	/// <summary>
@@ -61,7 +61,7 @@ public: // メンバ関数
 	/// </summary>
 	void Draw();
 
-	//衝突判定と応答
+	// 衝突判定と応答
 	void CheckAllCollisions();
 
 	/// <summary>
@@ -74,11 +74,10 @@ public: // メンバ関数
 	/// </summary>
 	void UpdateEnemyPopCommands();
 
-	//敵発生コマンド
+	// 敵発生コマンド
 	std::stringstream enemyPopCommands;
 
 private:
-
 	// メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -101,7 +100,7 @@ private:
 	Player* player_ = nullptr;
 
 	std::list<Enemy*> enemys_;
-	//敵弾
+	// 敵弾
 	std::list<EnemyBullet*> enemyBullets_;
 
 	bool isDebugCameraActive_ = false;
@@ -113,9 +112,9 @@ private:
 	Model* modelSkydome_ = nullptr;
 
 	RailCamera* railCamera_ = nullptr;
-	
+
 	Ui* ui_ = nullptr;
-	
+
 	bool waitFlag = false;
 
 	int waitTimer = 120;

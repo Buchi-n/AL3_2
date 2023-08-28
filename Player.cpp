@@ -1,8 +1,8 @@
 ﻿#include "Player.h"
 #include "ImGuiManager.h"
 #include "Input.h"
-#include "MathUtility.h"
 #include <cassert>
+#include "MathUtility.h"
 
 Player::~Player() {
 	for (PlayerBullet* bullet : bullets_) {
@@ -20,17 +20,21 @@ void Player::Initialize(Model* model, uint32_t textureHandle, const Vector3& tra
 
 	textureHandle_ = textureHandle;
 
-	// レティクル用テクスチャ取得
+	//レティクル用テクスチャ取得
 	uint32_t textureReticle = TextureManager::Load("target.png");
 
 	// スプライト生成
 	sprite2DReticle_ = Sprite::Create(textureReticle, {640, 360}, {1, 1, 1, 1}, {(0.5f), (0.5f)});
 
+
 	input_ = Input::GetInstance();
-	// 3Dレティクルのワールドトランスフォーム初期化
+	//3Dレティクルのワールドトランスフォーム初期化
 	worldTransform3Dreticle_.Initialize();
 	worldTransform_.translation_ = trans;
+
+	isDead_ = false;
 }
+
 
 Vector3 Player::GetWorldPosition() {
 	Vector3 worldPos = {};
@@ -44,6 +48,7 @@ Vector3 Player::GetWorldPosition() {
 
 void Player::SetParent(const WorldTransform* parent) { worldTransform_.parent_ = parent; }
 
+
 void Player::Attack() {
 	const float kBulletSpeed = 1.0f;
 	Vector3 velocity(0, 0, kBulletSpeed);
@@ -51,14 +56,16 @@ void Player::Attack() {
 	if (input_->TriggerKey(DIK_SPACE)) {
 		PlayerBullet* newBullet = new PlayerBullet();
 		newBullet->Initialize(model_, GetWorldPosition(), velocity);
-
+		
 		bullets_.push_back(newBullet);
 	}
 }
 
+
+
 void Player::Update(ViewProjection& viewProjection) {
 
-	// Vector3 positionReticle = worldTransform3Dreticle_.translation_;
+	//Vector3 positionReticle = worldTransform3Dreticle_.translation_;
 	Vector3 positionReticle = {
 	    worldTransform3Dreticle_.matWorld_.m[3][0], worldTransform3Dreticle_.matWorld_.m[3][1],
 	    worldTransform3Dreticle_.matWorld_.m[3][2]};
@@ -77,6 +84,8 @@ void Player::Update(ViewProjection& viewProjection) {
 	// スプライトのレティクルに座標設定
 	sprite2DReticle_->SetPosition(Vector2(positionReticle.x, positionReticle.y));
 
+
+
 	bullets_.remove_if([](PlayerBullet* bullet) {
 		if (bullet->IsDead()) {
 			delete bullet;
@@ -84,6 +93,9 @@ void Player::Update(ViewProjection& viewProjection) {
 		}
 		return false;
 	});
+
+
+
 
 	Vector3 move = {0, 0, 0};
 
@@ -126,7 +138,7 @@ void Player::Update(ViewProjection& viewProjection) {
 
 	worldTransform_.matWorld_ = MakeAffineMatrix(
 	    worldTransform_.scale_, worldTransform_.rotation_, worldTransform_.translation_);
-	// 親子関係
+	//親子関係
 	if (worldTransform_.parent_) {
 		worldTransform_.matWorld_ *= worldTransform_.parent_->matWorld_;
 	}
@@ -150,6 +162,7 @@ void Player::Update(ViewProjection& viewProjection) {
 	worldTransform_.translation_ = {sliderValue[0], sliderValue[1], sliderValue[2]};
 	ImGui::End();
 
+
 	// 自機から3Dレティクルへの距離
 	const float kDistancePlayerTo3DReticle = 50.0f;
 	// 自機から3Dレティクルへのオフセット(Z+向き)
@@ -169,11 +182,12 @@ void Player::Update(ViewProjection& viewProjection) {
 	    worldTransform_.matWorld_.m[3][0] + offset.x, worldTransform_.matWorld_.m[3][1] + offset.y,
 	    worldTransform_.matWorld_.m[3][2] + offset.z};
 	worldTransform3Dreticle_.UpdateMatrix();
+
 }
 
 void Player::Draw(ViewProjection& viewProjection) {
 	model_->Draw(worldTransform_, viewProjection, textureHandle_);
-	// 3Dレティクルを描画
+	//3Dレティクルを描画
 	model_->Draw(worldTransform3Dreticle_, viewProjection);
 	for (PlayerBullet* bullet : bullets_) {
 		bullet->Draw(viewProjection);
@@ -182,4 +196,7 @@ void Player::Draw(ViewProjection& viewProjection) {
 
 void Player::DrawUI() { sprite2DReticle_->Draw(); }
 
-void Player::OnCollision() {}
+
+void Player::OnCollision() {
+    isDead_ = true;
+}
