@@ -117,6 +117,9 @@ private:
 	Ui* ui_ = nullptr;
 
 	Score* score_ = nullptr;
+	int gameScore_ = 0;
+	//スコア増加量
+	int addScoreVal_ = 123;
 
 	bool waitFlag = false;
 

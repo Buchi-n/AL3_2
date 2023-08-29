@@ -36,7 +36,16 @@ void GameScene::Initialize() {
 	// タイトルのテクスチャ
 	TextureManager::Load("title.png");
 	//ナンバーテクスチャ
+	TextureManager::Load("num/0.png");
 	TextureManager::Load("num/1.png");
+	TextureManager::Load("num/2.png");
+	TextureManager::Load("num/3.png");
+	TextureManager::Load("num/4.png");
+	TextureManager::Load("num/5.png");
+	TextureManager::Load("num/6.png");
+	TextureManager::Load("num/7.png");
+	TextureManager::Load("num/8.png");
+	TextureManager::Load("num/9.png");
 	// 自キャラの生成
 	player_ = new Player();
 	Vector3 playerPosition{0, 0, 50};
@@ -97,6 +106,11 @@ void GameScene::Update() {
 	switch (scene) {
 	// タイトル
 	case GameScene::Scene::Title:
+		//デバッグ用
+		if (input_->PushKey(DIK_RETURN)) {
+			//ここを"敵に弾が当たったら"に配置
+			gameScore_+=addScoreVal_;
+		}
 
 		if (input_->TriggerKey(DIK_SPACE)) {
 			scene = Scene::GamePlay;
@@ -238,10 +252,12 @@ void GameScene::Draw() {
 	switch (scene) {
 	case GameScene::Scene::Title:
 		ui_->Draw();
-		score_->DrawUI();
+		//デバッグ用
+		score_->DrawScoreUI(gameScore_);
 		break;
 	case GameScene::Scene::GamePlay:
 		player_->DrawUI();
+		score_->DrawScoreUI(gameScore_);
 		break;
 	case GameScene::Scene::Result:
 		break;

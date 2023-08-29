@@ -2,21 +2,31 @@
 #include <stdio.h>
 
 void Score::Initialize() {
-	val_ = 0;
-	//for (int i = 0; i < 9; i++) {
-		sprite2DNum_ = nullptr;
-	//};
-	uint32_t textureNum = TextureManager::Load("num/1.png");
-
-	sprite2DNum_ = Sprite::Create(textureNum, {100, 100}, {1, 1, 1, 1}, {(0.0f), (0.0f)});
-
+	for (int i = 0; i < 6; i++) {
+		for (int j = 0; j < 10; j++) {
+			sprite2DNum_[i][j] = nullptr;
+		}
+	};
+	uint32_t textureNum[10] = {
+	    TextureManager::Load("num/0.png"), TextureManager::Load("num/1.png"),
+	    TextureManager::Load("num/2.png"), TextureManager::Load("num/3.png"),
+	    TextureManager::Load("num/4.png"), TextureManager::Load("num/5.png"),
+	    TextureManager::Load("num/6.png"), TextureManager::Load("num/7.png"),
+	    TextureManager::Load("num/8.png"), TextureManager::Load("num/9.png"),
+	};
+	float posX = 1250;
+	for (int i = 0; i < 6; i++) {
+		for (int j = 0; j < 10; j++) {
+			sprite2DNum_[i][j] =
+			    Sprite::Create(textureNum[j], {posX, 30}, {1, 1, 1, 1}, {(1.0f), (0.0f)});
+		}
+		posX -= 50;
+	}
 }
 
-Score::~Score() { delete sprite2DNum_; }
-
-void Score::Draw(int score) {
+void Score::DrawScoreUI(int score) {
 	int aa[6];
-	int bb;
+	int bb = 0;
 	for (int i = 0; i < 6; i++) {
 		if (i == 0) {
 			bb = 100000;
@@ -25,12 +35,18 @@ void Score::Draw(int score) {
 		score -= aa[i] * bb;
 		bb /= 10;
 	}
-	// 描画処理
-	// printf("%d ", num[0]);//100000の位
-	// printf("%d ", num[1]);//10000の位
-	// printf("%d ", num[2]);//1000の位
-	// printf("%d ", num[3]);//100の位
-	// printf("%d ", num[4]);//10の位
-	// printf("%d", num[5]);//1の位
+	sprite2DNum_[0][aa[5]]->Draw();
+	sprite2DNum_[1][aa[4]]->Draw();
+	sprite2DNum_[2][aa[3]]->Draw();
+	sprite2DNum_[3][aa[2]]->Draw();
+	sprite2DNum_[4][aa[1]]->Draw();
+	sprite2DNum_[5][aa[0]]->Draw();
 }
-void Score::DrawUI() { sprite2DNum_->Draw(); }
+
+Score::~Score() {
+	for (int i = 0; i < 6; i++) {
+		for (int j = 0; j < 10; j++) {
+			delete sprite2DNum_[i][j];
+		}
+	}
+}

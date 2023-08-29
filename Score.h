@@ -12,30 +12,9 @@ public:
 	/// デストラクタ
 	/// </summary>
 	~Score();
-	/// <summary>
-	/// スコア描画:６桁まで
-	/// </summary>
-	/// <param name="score">対象のスコア</param>
-	void Draw(int score);
-	/// <summary>
-	/// スコア加算
-	/// </summary>
-	/// <param name="addVal">加算するスコア</param>
-	void AddScore(int addVal) { val_ += addVal; }
-	/// <summary>
-	/// スコアセッター:6桁まで
-	/// </summary>
-	/// <param name="score">セットするスコア</param>
-	void SetScore(int score) { val_ = score; }
-	/// <summary>
-	/// スコアゲッター
-	/// </summary>
-	/// <returns></returns>
-	int GetScore() { return val_; }
 
-	void DrawUI();
+	void DrawScoreUI(int score);
 
 private:
-	int val_;
-	Sprite* sprite2DNum_;
+	Sprite* sprite2DNum_[6][10];
 };
