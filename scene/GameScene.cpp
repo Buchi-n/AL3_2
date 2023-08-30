@@ -34,9 +34,9 @@ void GameScene::Initialize() {
 	// レティクルのテクスチャ
 	TextureManager::Load("target.png");
 	// タイトルのテクスチャ
-	TextureManager::Load("Title.png");
+	TextureManager::Load("title.png");
 	// リザルトのテクスチャ
-	TextureManager::Load("Title.png");
+	TextureManager::Load("result.png");
 	// ナンバーテクスチャ
 	TextureManager::Load("num/0.png");
 	TextureManager::Load("num/1.png");

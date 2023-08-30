@@ -8,7 +8,7 @@ BackGround::~BackGround() {
 void BackGround::Initialize() {
 	//テクスチャ取得
 	uint32_t texTitle = TextureManager::Load("title.png");
-	uint32_t texResult = TextureManager::Load("title.png");
+	uint32_t texResult = TextureManager::Load("result.png");
 	//生成
 	spriteTitle_ = Sprite::Create(texTitle, {0, 0}, {1, 1, 1, 1}, {(0.0f), (0.0f)});
 	spriteResult_ = Sprite::Create(texResult, {0, 0}, {1, 1, 1, 1}, {(0.0f), (0.0f)});

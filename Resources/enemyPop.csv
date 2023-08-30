@@ -1,7 +1,8 @@
 // コマンド,x,y,z
-WAIT,120,,
-POP,6,8,100
-WAIT,120,,
+UniverseShooter
+WAIT,150,,
+POP,0,25,100
+WAIT,1200,,
 POP,-6,8,105
 WAIT,120,,
 POP,12,-8,110

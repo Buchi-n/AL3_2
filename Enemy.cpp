@@ -60,24 +60,26 @@ void Enemy::Update() {
 	switch (phase_) {
 	case Phase::Approach:
 	default:
-		shotTimer_--;
+		if (worldTransform_.translation_.z > 50.0f) {
+			shotTimer_--;
 
-		if (shotTimer_ <= 0) {
-			Fire();
+			if (shotTimer_ <= 0) {
+				Fire();
 
-			shotTimer_ = kFireInterval;
+				shotTimer_ = kFireInterval;
+			}
 		}
 
-		worldTransform_.translation_.z -= 0.3f;
+		worldTransform_.translation_.z -= 0.1f;
 
-		if (worldTransform_.translation_.z < 0.0f) {
+		if (worldTransform_.translation_.z < 60.0f) {
 			phase_ = Phase::Leave;
 		
 		}
 		break;
 
     case Phase::Leave:
-		worldTransform_.translation_.y += 0.3f;
+		worldTransform_.translation_.z += 0.3f;
 		break;
 	}
 
@@ -93,7 +95,7 @@ void Enemy::Draw(ViewProjection& viewProjection) {
 
 void Enemy::Fire() {
 	assert(player_);
-	const float kBulletSpeed = 1.0f;
+	const float kBulletSpeed = 0.5f;
 	/*Vector3 velocity(0, 0, -kBulletSpeed);
 	velocity = TransformNormal(velocity, worldTransform_.matWorld_);*/
 	Vector3 a = GetWorldPosition();

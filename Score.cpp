@@ -15,14 +15,14 @@ void Score::Initialize() {
 	    TextureManager::Load("num/6.png"), TextureManager::Load("num/7.png"),
 	    TextureManager::Load("num/8.png"), TextureManager::Load("num/9.png"),
 	};
-	float posX = 1250;
-	float posXResult = 900;
+	float posX = 340;
+	float posXResult = 765;
 	for (int i = 0; i < 6; i++) {
 		for (int j = 0; j < 10; j++) {
 			sprite2DNum_[i][j] =
 			    Sprite::Create(textureNum[j], {posX, 30}, {1, 1, 1, 1}, {(1.0f), (0.0f)});
 			sprite2DNumResult_[i][j] =
-			    Sprite::Create(textureNum[j], {posXResult, 360}, {1, 1, 1, 1}, {(0.5f), (0.5f)});
+			    Sprite::Create(textureNum[j], {posXResult, 430}, {1, 1, 1, 1}, {(0.5f), (0.5f)});
 		}
 		posX -= 50;
 		posXResult -= 50;

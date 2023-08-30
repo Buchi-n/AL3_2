@@ -154,13 +154,13 @@ void Player::Update(ViewProjection& viewProjection) {
 	// 行列転送
 	worldTransform_.TransferMatrix();
 
-	ImGui::Begin("player");
-	float sliderValue[3] = {
-	    worldTransform_.translation_.x, worldTransform_.translation_.y,
-	    worldTransform_.translation_.z};
-	ImGui::SliderFloat3("position", sliderValue, -20.0f, 20.0f);
-	worldTransform_.translation_ = {sliderValue[0], sliderValue[1], sliderValue[2]};
-	ImGui::End();
+	//ImGui::Begin("player");
+	//float sliderValue[3] = {
+	//    worldTransform_.translation_.x, worldTransform_.translation_.y,
+	//    worldTransform_.translation_.z};
+	//ImGui::SliderFloat3("position", sliderValue, -20.0f, 20.0f);
+	//worldTransform_.translation_ = {sliderValue[0], sliderValue[1], sliderValue[2]};
+	//ImGui::End();
 
 
 	// 自機から3Dレティクルへの距離
@@ -187,8 +187,6 @@ void Player::Update(ViewProjection& viewProjection) {
 
 void Player::Draw(ViewProjection& viewProjection) {
 	model_->Draw(worldTransform_, viewProjection, textureHandle_);
-	//3Dレティクルを描画
-	model_->Draw(worldTransform3Dreticle_, viewProjection);
 	for (PlayerBullet* bullet : bullets_) {
 		bullet->Draw(viewProjection);
 	}
