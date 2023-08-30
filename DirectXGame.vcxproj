@@ -120,7 +120,7 @@
     <ClCompile Include="scene\GameScene.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="Skydome.cpp" />
-    <ClCompile Include="Ui.cpp" />
+    <ClCompile Include="BuckGround.cpp" />
     <ClCompile Include="WorldTransform.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -160,7 +160,7 @@
     <ClInclude Include="scene\GameScene.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="Skydome.h" />
-    <ClInclude Include="Ui.h" />
+    <ClInclude Include="BackGround.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\TerrainPS.hlsl">

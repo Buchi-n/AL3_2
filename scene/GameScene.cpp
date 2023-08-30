@@ -23,7 +23,7 @@ GameScene::~GameScene() {
 	delete skydome_;
 	delete modelSkydome_;
 	delete railCamera_;
-	delete ui_;
+	delete BackGround_;
 }
 
 void GameScene::Initialize() {
@@ -34,6 +34,8 @@ void GameScene::Initialize() {
 	// レティクルのテクスチャ
 	TextureManager::Load("target.png");
 	// タイトルのテクスチャ
+	TextureManager::Load("Title.png");
+	// リザルトのテクスチャ
 	TextureManager::Load("Title.png");
 	// ナンバーテクスチャ
 	TextureManager::Load("num/0.png");
@@ -61,7 +63,7 @@ void GameScene::Initialize() {
 	skydome_ = new Skydome();
 	// レールカメラの生成
 	railCamera_ = new RailCamera();
-	ui_ = new Ui();
+	BackGround_ = new BackGround();
 	score_ = new Score();
 	LoadEnemyPopData();
 
@@ -70,7 +72,7 @@ void GameScene::Initialize() {
 	model_ = Model::Create();
 	player_->Initialize(model_, textureHandleP_, playerPosition);
 	player_->SetParent(&railCamera_->GetWorldTransform());
-	ui_->Initialize();
+	BackGround_->Initialize();
 	score_->Initialize();
 	newEnemy->Initialize(model_, textureHandleE_);
 	newEnemy->SetPlayer(player_);
@@ -117,6 +119,12 @@ void GameScene::Update() {
 
 	// ゲームプレイ
 	case GameScene::Scene::GamePlay:
+
+		++frame_;
+		if (frame_ >= 60) {
+			addScoreVal_ += 10;
+			frame_ = 0;
+		}
 		// 自キャラの更新
 		player_->Update(viewProjection_);
 		// 敵キャラの更新
@@ -252,16 +260,15 @@ void GameScene::Draw() {
 	/// </summary>
 	switch (scene) {
 	case GameScene::Scene::Title:
-		ui_->Draw();
-		// デバッグ用
-		score_->DrawScoreUI(gameScore_);
+		BackGround_->Draw(0);
 		break;
 	case GameScene::Scene::GamePlay:
 		player_->DrawUI();
 		score_->DrawScoreUI(gameScore_);
 		break;
 	case GameScene::Scene::Result:
-		score_->DrawScoreUI(gameScore_);
+		BackGround_->Draw(1);
+		score_->DrawScoreUIResult(gameScore_);
 		break;
 	default:
 		break;
