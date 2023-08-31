@@ -122,7 +122,7 @@ void GameScene::Update() {
 
 		++frame_;
 		if (frame_ >= 60) {
-			addScoreVal_ += 10;
+			addScoreVal_ += 1;
 			frame_ = 0;
 		}
 		// 自キャラの更新

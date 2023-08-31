@@ -119,7 +119,7 @@ private:
 	Score* score_ = nullptr;
 	int gameScore_ = 0;
 	//スコア増加量
-	int addScoreVal_ = 128;
+	int addScoreVal_ = 1;
 	int frame_ = 0;
 
 	bool waitFlag = false;
