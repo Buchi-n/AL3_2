@@ -30,40 +30,40 @@ void Score::Initialize() {
 }
 
 void Score::DrawScoreUI(int score) {
-	int aa[6];
-	int bb = 0;
+	int nums[6];
+	int division = 0;
 	for (int i = 0; i < 6; i++) {
 		if (i == 0) {
-			bb = 100000;
+			division = 100000;
 		}
-		aa[i] = score / bb;
-		score -= aa[i] * bb;
-		bb /= 10;
+		nums[i] = score / division;
+		score -= nums[i] * division;
+		division /= 10;
 	}
-	sprite2DNum_[0][aa[5]]->Draw();
-	sprite2DNum_[1][aa[4]]->Draw();
-	sprite2DNum_[2][aa[3]]->Draw();
-	sprite2DNum_[3][aa[2]]->Draw();
-	sprite2DNum_[4][aa[1]]->Draw();
-	sprite2DNum_[5][aa[0]]->Draw();
+	sprite2DNum_[0][nums[5]]->Draw();
+	sprite2DNum_[1][nums[4]]->Draw();
+	sprite2DNum_[2][nums[3]]->Draw();
+	sprite2DNum_[3][nums[2]]->Draw();
+	sprite2DNum_[4][nums[1]]->Draw();
+	sprite2DNum_[5][nums[0]]->Draw();
 }
 void Score::DrawScoreUIResult(int score) {
-	int aa[6];
-	int bb = 0;
+	int nums[6];
+	int division = 0;
 	for (int i = 0; i < 6; i++) {
 		if (i == 0) {
-			bb = 100000;
+			division = 100000;
 		}
-		aa[i] = score / bb;
-		score -= aa[i] * bb;
-		bb /= 10;
+		nums[i] = score / division;
+		score -= nums[i] * division;
+		division /= 10;
 	}
-	sprite2DNumResult_[0][aa[5]]->Draw();
-	sprite2DNumResult_[1][aa[4]]->Draw();
-	sprite2DNumResult_[2][aa[3]]->Draw();
-	sprite2DNumResult_[3][aa[2]]->Draw();
-	sprite2DNumResult_[4][aa[1]]->Draw();
-	sprite2DNumResult_[5][aa[0]]->Draw();
+	sprite2DNumResult_[0][nums[5]]->Draw();
+	sprite2DNumResult_[1][nums[4]]->Draw();
+	sprite2DNumResult_[2][nums[3]]->Draw();
+	sprite2DNumResult_[3][nums[2]]->Draw();
+	sprite2DNumResult_[4][nums[1]]->Draw();
+	sprite2DNumResult_[5][nums[0]]->Draw();
 }
 
 Score::~Score() {

@@ -14,7 +14,6 @@ public:
 
 	Vector3 GetWorldPosition();
 	
-
 	enum class Phase {
 		Approach,
 		Leave,
@@ -49,7 +48,6 @@ private:
 	int32_t shotInterval_ = 60;
 	Player* player_ = nullptr;
 	float radius_ = 1.0f;
-	//寿命
 	bool isDead_ = false;
 };
 

@@ -12,8 +12,6 @@
 class Player {
 
 public:
-	
-	
 
 	/// <summary>
 	/// ワールド座標
@@ -91,8 +89,6 @@ private:
 	WorldTransform worldTransform3Dreticle_;
 	// 2Dレティクル用スプライト
 	Sprite* sprite2DReticle_ = nullptr;
-	//寿命
+
 	bool isDead_ = false;
-
-
 };

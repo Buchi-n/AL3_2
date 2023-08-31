@@ -9,9 +9,7 @@ public:
 
 	void Initialize(Vector3 trans,Vector3 rot);
 
-
 	void Update();
-
 
 	ViewProjection GetViewProjection() { return viewProjection_; }
 	WorldTransform& GetWorldTransform() { return worldTransform_; }

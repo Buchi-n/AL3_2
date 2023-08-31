@@ -18,7 +18,6 @@ GameScene::~GameScene() {
 	for (Enemy* enemy : enemys_) {
 		delete enemy;
 	}
-
 	delete debugCamera_;
 	delete skydome_;
 	delete modelSkydome_;
@@ -76,7 +75,6 @@ void GameScene::Initialize() {
 	score_->Initialize();
 	newEnemy->Initialize(model_, textureHandleE_);
 	newEnemy->SetPlayer(player_);
-	// newEnemy->Initialize(model_, textureHandleE_);
 	// 敵キャラにゲームシーンを渡す
 	newEnemy->SetGameScene(this);
 	enemys_.push_back(newEnemy);
@@ -96,8 +94,6 @@ void GameScene::Initialize() {
 
 	AxisIndicator::GetInstance()->SetTargetViewProjection(&viewProjection_);
 
-	/*viewProjection_.farZ = 10.0f;
-	viewProjection_.Initialize();*/
 	// レールカメラ初期化
 	railCamera_->Initialize(worldTransform_.translation_, worldTransform_.rotation_);
 }
@@ -146,14 +142,9 @@ void GameScene::Update() {
 
 		if (isDebugCameraActive_) {
 			debugCamera_->Update();
-
-			/*viewProjection_.matView = debugCamera_->GetViewProjection().matView;
-			viewProjection_.matProjection = debugCamera_->GetViewProjection().matProjection;*/
-
 		} else {
 			viewProjection_.matView = railCamera_->GetViewProjection().matView;
 			viewProjection_.matProjection = railCamera_->GetViewProjection().matProjection;
-			// viewProjection_.UpdateMatrix();
 			viewProjection_.TransferMatrix();
 		}
 
@@ -417,6 +408,4 @@ void GameScene::UpdateEnemyPopCommands() {
 			break;
 		}
 	}
-	
-	
 }

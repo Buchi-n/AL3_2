@@ -35,7 +35,6 @@ void Player::Initialize(Model* model, uint32_t textureHandle, const Vector3& tra
 	isDead_ = false;
 }
 
-
 Vector3 Player::GetWorldPosition() {
 	Vector3 worldPos = {};
 
@@ -48,7 +47,6 @@ Vector3 Player::GetWorldPosition() {
 
 void Player::SetParent(const WorldTransform* parent) { worldTransform_.parent_ = parent; }
 
-
 void Player::Attack() {
 	const float kBulletSpeed = 1.0f;
 	Vector3 velocity(0, 0, kBulletSpeed);
@@ -60,8 +58,6 @@ void Player::Attack() {
 		bullets_.push_back(newBullet);
 	}
 }
-
-
 
 void Player::Update(ViewProjection& viewProjection) {
 
@@ -84,8 +80,6 @@ void Player::Update(ViewProjection& viewProjection) {
 	// スプライトのレティクルに座標設定
 	sprite2DReticle_->SetPosition(Vector2(positionReticle.x, positionReticle.y));
 
-
-
 	bullets_.remove_if([](PlayerBullet* bullet) {
 		if (bullet->IsDead()) {
 			delete bullet;
@@ -93,9 +87,6 @@ void Player::Update(ViewProjection& viewProjection) {
 		}
 		return false;
 	});
-
-
-
 
 	Vector3 move = {0, 0, 0};
 
@@ -153,15 +144,6 @@ void Player::Update(ViewProjection& viewProjection) {
 
 	// 行列転送
 	worldTransform_.TransferMatrix();
-
-	//ImGui::Begin("player");
-	//float sliderValue[3] = {
-	//    worldTransform_.translation_.x, worldTransform_.translation_.y,
-	//    worldTransform_.translation_.z};
-	//ImGui::SliderFloat3("position", sliderValue, -20.0f, 20.0f);
-	//worldTransform_.translation_ = {sliderValue[0], sliderValue[1], sliderValue[2]};
-	//ImGui::End();
-
 
 	// 自機から3Dレティクルへの距離
 	const float kDistancePlayerTo3DReticle = 50.0f;

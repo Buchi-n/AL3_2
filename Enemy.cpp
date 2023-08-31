@@ -47,14 +47,6 @@ void Enemy::Update() {
 	//移動
 	Vector3 move = {0, 0, 0};
 
-	// キャラクターの移動速さ
-	/*const float kCharacterSpeed = 0.02f;
-
-	move.z -= kCharacterSpeed;
-
-	worldTransform_.translation_.x += move.x;
-	worldTransform_.translation_.y += move.y;
-	worldTransform_.translation_.z += move.z;*/
 	worldTransform_.UpdateMatrix();
 
 	switch (phase_) {
@@ -96,8 +88,6 @@ void Enemy::Draw(ViewProjection& viewProjection) {
 void Enemy::Fire() {
 	assert(player_);
 	const float kBulletSpeed = 0.5f;
-	/*Vector3 velocity(0, 0, -kBulletSpeed);
-	velocity = TransformNormal(velocity, worldTransform_.matWorld_);*/
 	Vector3 a = GetWorldPosition();
 	Vector3 b = player_->GetWorldPosition();
 	Vector3 c = {};
